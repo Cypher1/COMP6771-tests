@@ -8,8 +8,8 @@ fi
 
 # Copy EuclideanVector code into this dir.
 CODE_DIR="$1"
-cp "${CODE_DIR}EuclideanVector.cpp" .
-cp "${CODE_DIR}EuclideanVector.h" .
+cp "${CODE_DIR}/EuclideanVector.cpp" .
+cp "${CODE_DIR}/EuclideanVector.h" .
 
 # Compile our test-suite..
 make
