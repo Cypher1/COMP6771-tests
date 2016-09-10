@@ -2,13 +2,13 @@
 # First argument should be the location of your assignment code
 
 code_path="$1"
-if [[ $code_path =~ ^$ ]]; then
-    code_path="."
-    echo "Usage: ./test path_to_code"
+if [[ -z $code_path ]]; then
+    code_path="$(pwd)"
 fi
 
 echo "Getting code from \"$code_path\""
 
+cd "$(dirname "$0")"
 cp "$code_path/Graph.h" tests/Graph.h
 cp "$code_path/Graph.tem" tests/Graph.tem
 
