@@ -2,7 +2,7 @@
 # First argument should be the location of your assignment code
 
 code_path="$1"
-if [[ $code_path =~ "^$" ]]; then
+if [[ $code_path =~ ^$ ]]; then
     code_path="."
     echo "Usage: ./test path_to_code"
 fi
