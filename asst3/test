@@ -1,11 +1,16 @@
 #!/bin/bash
+# First argument should be the location of your assignment code
 
-clear
+code_path="$1"
+if [[ $code_path =~ "^$" ]]; then
+    code_path="."
+    echo "Usage: ./test path_to_code"
+fi
 
-rm tests/Graph.h
-rm tests/Graph.tem
-cp Graph.h tests/Graph.h
-cp Graph.tem tests/Graph.tem
+echo "Getting code from \"$code_path\""
+
+cp "$code_path/Graph.h" tests/Graph.h
+cp "$code_path/Graph.tem" tests/Graph.tem
 
 FILES=tests/test*.cpp
 
@@ -16,6 +21,9 @@ do
     echo "Test: $test_file Result: $result_file"
     g++ -std=c++14 -Wall -Werror -O2 "$test_file" || exit
     ./a.out > "$out_file"
-    (diff -y "$out_file" "$result_file" > .diff && echo "PASSED") || (echo "FAILED"; cat .diff; exit)
-    rm ./a.out
+    (diff -y "$out_file" "$result_file" > .diff && echo "PASSED") || (echo "FAILED"; cat .diff)
+    rm ./a.out 2> /dev/null
+    rm ./.diff 2> /dev/null
 done
+rm tests/Graph.h 2> /dev/null
+rm tests/Graph.tem 2> /dev/null
